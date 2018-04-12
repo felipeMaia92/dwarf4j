@@ -3,6 +3,7 @@ RELEASE/
 *.class
 *.jar
 *.log
+*.db
 
 .classpath
 .externalToolBuilders/
