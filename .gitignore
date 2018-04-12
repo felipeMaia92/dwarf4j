@@ -1,0 +1,12 @@
+
+RELEASE/
+*.class
+*.jar
+*.log
+
+.classpath
+.externalToolBuilders/
+.project
+.settings/
+maven-eclipse.xml
+target/
