@@ -97,6 +97,7 @@ public class Pool extends Thread {
             .setNoncePremiada(-1)
             .setHashPremiada("");
             bloco.setMerkleBranches((String[]) merkleBranches.toArray(bloco.getMerkleBranches()));
+            if(bloco.getLimparTrabalho()) { this.blocos.clear(); this.logger.info("Limpando trabalho..."); }
             this.blocos.add(bloco);
             this.logger.info(bloco);
           }

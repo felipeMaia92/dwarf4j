@@ -1,24 +1,13 @@
 package dwarf4j;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.Calendar;
+
 public class App {
 
-  @SuppressWarnings("resource")
-  public static void main(String[] args) {
-    org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(App.class);
-    logger.info("******** Iniciando Dwarf4J ********");
+  public static void main(String[] args) throws UnknownHostException, IOException {
 
-    org.springframework.context.ApplicationContext context = new org.springframework.context.annotation.AnnotationConfigApplicationContext(dwarf4j.database.Dwarf4JSpringConfig.class);
-    dwarf4j.workforce.Pool antpool = (dwarf4j.workforce.Pool) context.getBean("antpool");
-    try {
-      antpool.iniciar();
-    }
-    catch(Exception e) {
-      e.printStackTrace();
-      System.exit(-1);
-    }
-
-
-    /*
     dwarf4j.workforce.Bloco b = new dwarf4j.workforce.Bloco();
     b.setIdJob("dummy");
     b.setCoinbaseParte1("a");
@@ -30,8 +19,10 @@ public class App {
     b.setBits("19015f53");
     b.setLimparTrabalho(false);
     b.setNomeWorker("teste");
+
+    long tempo = Calendar.getInstance().getTimeInMillis();
     System.out.println(b.minerar());
-    */
+    System.out.println(String.format("Tempo para calcular 1m hashes: %f", (Calendar.getInstance().getTimeInMillis() - tempo) / 1000.0f));
 
     /*
     dwarf4j.workforce.Pool antpool = new dwarf4j.workforce.Pool();

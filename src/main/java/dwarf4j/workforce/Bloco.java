@@ -63,13 +63,15 @@ public class Bloco {
   public String toString() { return GSonUtils.getInstance().obj2Json(this); }
 
   public Bloco minerar() {
-    if(this.getLimparTrabalho()) return null;
+
     long bits = new java.math.BigInteger(this.getBits(), 16).longValue();
     long exp = bits >> 24;
     long mant = bits & 0xffffff;
     String alvoHexStr = String.format("%064x", (mant * (1 << (8 * (exp - 3)))));
     alvoHexStr = alvoHexStr.substring(40, 64).concat(alvoHexStr.substring(0, 40));
-    java.math.BigInteger alvo = new java.math.BigInteger(alvoHexStr, 16);
+    final java.math.BigInteger alvo = new java.math.BigInteger(alvoHexStr, 16);
+    final int alvoStrlen = new String(alvo.toByteArray()).length() * 2;
+
     for(String merkleBranch : this.getMerkleBranches()) {
       java.nio.ByteBuffer tempBuffer = java.nio.ByteBuffer.allocate(4);
       tempBuffer.putInt(this.getVersaoBlocoBitcoin());
@@ -77,23 +79,21 @@ public class Bloco {
       String parte2 = dwarf4j.utils.LogicUtils.getInstance().inverterString(dwarf4j.utils.LogicUtils.getInstance().hex2Str(this.getHashBlocoAnterior()));
       String parte3 = dwarf4j.utils.LogicUtils.getInstance().inverterString(dwarf4j.utils.LogicUtils.getInstance().hex2Str(merkleBranch));
       StringBuilder parte4 = new StringBuilder();
-      tempBuffer = java.nio.ByteBuffer.allocate(4 * 2);
+      tempBuffer = java.nio.ByteBuffer.allocate(8);
       tempBuffer.putInt(new java.math.BigInteger(this.getBits(), 16).intValue());
       tempBuffer.putInt(new java.math.BigInteger(this.getTempo(), 16).intValue());
       for(int i = tempBuffer.array().length - 1; i > -1; i--)
         parte4.append(tempBuffer.array()[i] < 0 ? (char) (tempBuffer.array()[i] + 0x100) : (char) tempBuffer.array()[i]);
-      String prefixoHeader = parte1.concat(parte2.concat(parte3.concat(parte4.toString())));
+      final String prefixoHeader = parte1.concat(parte2.concat(parte3.concat(parte4.toString())));
 
       // LÓGICA MATADORA - I
-      for(int nonce = 856192320; nonce < dwarf4j.utils.LogicUtils.getInstance().getMaxNonce(); nonce++) {
-        String temp1 = prefixoHeader.concat(dwarf4j.utils.LogicUtils.getInstance().inverterString(new String(java.nio.ByteBuffer.allocate(4).putInt(nonce).array())));
-        String temp2 = dwarf4j.utils.LogicUtils.getInstance().str2SHA256(dwarf4j.utils.LogicUtils.getInstance().str2SHA256(temp1));
-        byte[] temp3 = dwarf4j.utils.LogicUtils.getInstance().inverterString(temp2).getBytes(java.nio.charset.StandardCharsets.ISO_8859_1);
-        final String hash = String.format("%040x", new java.math.BigInteger(1, temp3)).toLowerCase();
-        if(new java.math.BigInteger(hash, 16).compareTo(alvo) < 0) {
-          this.setHashPremiada(hash).setNoncePremiada(nonce);
-          break;
-        }
+      for(int nonce = 855192327; nonce < dwarf4j.utils.LogicUtils.getInstance().getMaxNonce(); nonce++) {
+        String sufixoHeader = dwarf4j.utils.LogicUtils.getInstance().inverterString(new String(java.nio.ByteBuffer.allocate(4).putInt(nonce).array()));
+        String header = prefixoHeader.concat(sufixoHeader);
+        String duploSHA256 = dwarf4j.utils.LogicUtils.getInstance().str2SHA256(dwarf4j.utils.LogicUtils.getInstance().str2SHA256(header));
+        byte[] hash = dwarf4j.utils.LogicUtils.getInstance().inverterString(duploSHA256).getBytes(java.nio.charset.StandardCharsets.ISO_8859_1);
+        final String hashStr = String.format("%040x", new java.math.BigInteger(1, hash)).toLowerCase();
+        if(hashStr.length() < alvoStrlen) return this.setHashPremiada(hashStr).setNoncePremiada(nonce);
       }
       // LÓGICA MATADORA - F
 
