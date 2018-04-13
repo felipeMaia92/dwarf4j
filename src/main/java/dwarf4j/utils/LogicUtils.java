@@ -24,8 +24,8 @@ public class LogicUtils {
   }
 
   public String str2SHA256(String entrada) {
-    SHA256 sha256 = new SHA256();
     StringBuilder sb = new StringBuilder();
+    SHA256 sha256 = new SHA256();
     for(byte b : sha256.hash(entrada.getBytes(java.nio.charset.StandardCharsets.ISO_8859_1)))
       sb.append(b < 0 ? (char) (b + 0x100) : (char) b);
     return sb.toString();

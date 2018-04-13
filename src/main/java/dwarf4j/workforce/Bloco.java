@@ -98,6 +98,7 @@ public class Bloco {
       // LÓGICA MATADORA - F
 
     }
+
     return this;
   }
 
