@@ -16,12 +16,7 @@
 		<dependency.dir>lib</dependency.dir>
 		<main.class>${project.groupId}.App</main.class>
 		<!-- (...) -->
-		<springframework.core.version>4.3.11.RELEASE</springframework.core.version>
-		<springframework.version>3.2.14.RELEASE</springframework.version>
-		<hibernate-entitymanager.version>4.3.11.Final</hibernate-entitymanager.version>
-		<spring-data-jpa.version>1.9.0.RELEASE</spring-data-jpa.version>
-		<quartz.version>1.8.6</quartz.version>
-		<h2.version>1.4.191</h2.version>
+		<jocl.version>2.0.0</jocl.version>
 		<gson.version>2.8.0</gson.version>
 		<log4j.version>1.2.17</log4j.version>
 		<!-- (...) -->
@@ -96,97 +91,11 @@
 
 	<dependencies>
 
-		<!-- Spring Framework - I -->
-
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${springframework.core.version}</version>
+		    <groupId>org.jocl</groupId>
+		    <artifactId>jocl</artifactId>
+		    <version>${jocl.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${springframework.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${springframework.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${springframework.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${springframework.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- Spring Framework - F -->
-
-		<!-- JPA - I -->
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate-entitymanager.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring-data-jpa.version}</version>
-		</dependency>
-
-		<dependency>
-		    <groupId>com.h2database</groupId>
-		    <artifactId>h2</artifactId>
-		    <version>${h2.version}</version>
-		</dependency>
-
-		<!-- JPA - F -->
-
-		<!-- Quartz - I -->
-
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>${quartz.version}</version>
-		</dependency>
-
-		<!-- Quartz - F -->
-
-		<!-- GSon + Log4J - I -->
 
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
@@ -199,8 +108,6 @@
 		    <artifactId>log4j</artifactId>
 		    <version>${log4j.version}</version>
 		</dependency>
-
-		<!-- GSon + Log4J - F -->
 
 	</dependencies>
 

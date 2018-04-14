@@ -88,7 +88,7 @@ public class Pool extends Thread {
             .setHashBlocoAnterior((String) params.get(1))
             .setCoinbaseParte1((String) params.get(2))
             .setCoinbaseParte2((String) params.get(3))
-            .setVersaoBlocoBitcoin(Integer.valueOf(dwarf4j.utils.LogicUtils.getInstance().inverterString((String) params.get(5))))
+            .setVersaoBlocoBitcoin(Integer.valueOf(dwarf4j.workforce.Bloco.inverterString((String) params.get(5))))
             .setBits((String) params.get(6))
             .setTempo((String) params.get(7))
             .setLimparTrabalho((Boolean) params.get(8))

@@ -2,11 +2,12 @@ package dwarf4j;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Calendar;
 
 public class App {
 
   public static void main(String[] args) throws UnknownHostException, IOException {
+
+    new dwarf4j.ocl.SHA256OCL().teste();
 
     dwarf4j.workforce.Bloco b = new dwarf4j.workforce.Bloco();
     b.setIdJob("dummy");
@@ -19,12 +20,12 @@ public class App {
     b.setBits("19015f53");
     b.setLimparTrabalho(false);
     b.setNomeWorker("teste");
-
-    long tempo = Calendar.getInstance().getTimeInMillis();
-    System.out.println(b.minerar());
-    System.out.println(String.format("Tempo para calcular 1m hashes: %f", (Calendar.getInstance().getTimeInMillis() - tempo) / 1000.0f));
+    b.minerar();
 
     /*
+    long tempo = java.util.Calendar.getInstance().getTimeInMillis();
+    System.err.println(String.format("Tempo para calcular 8 hashes: %f", (java.util.Calendar.getInstance().getTimeInMillis() - tempo) / 1000.0f));
+
     dwarf4j.workforce.Pool antpool = new dwarf4j.workforce.Pool();
     antpool.setNome("Antpool");
     antpool.setHost("stratum.antpool.com");
@@ -33,12 +34,6 @@ public class App {
     antpool.setPassword("xxx");
     antpool.setWorkers(new String[] { "alpha", });
     antpool.iniciar();
-
-    while(true) {
-      System.err.println(String.format("Qtd. Blocos: %d", antpool.getBlocos().size()));
-      try { Thread.sleep(10000); }
-      catch (InterruptedException e) { } // ignore
-    }
     */
 
   }
